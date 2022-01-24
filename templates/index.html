@@ -1,18 +1,120 @@
 <html>
 
 <head>
-    <meta charset="utf-8">
+    <title>nch</title>
+    <style>
+        body {
+            text-align: center;
+            background-color: #314357;
+        }
+
+        .button {
+            background-color: #e3b587;
+            width: 200px;
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 20px;
+        }
+
+        .contents {
+            background-color: #456672;
+            width: 300px;
+            height: 300px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 20px;
+            margin: 10px;
+        }
+
+        .form_input {
+            color: black;
+            display: flex;
+            justify-content: center;
+        }
+
+        .chated {
+            margin: 10px auto;
+            display: flex;
+            align-items: center;
+            background-color: #e3b587;
+            width: 90%;
+            height: 200px;
+            border-radius: 20px;
+        }
+
+        .name {
+            width: 10%;
+        }
+    </style>
 </head>
 
 <body>
-    Hello!
     <div class="form_input">
         <div class="contents"><input type="text" id="form_name" name="name" size="20"></div>
         <div class="contents"><input type="text" id="form_comment" name="comment" size="20"></div>
-        <div class="contents"><button class="button" id="button_send">送信</button></div>
-        <div class="contents"><button class="button" id="button_update">更新</button></div>
+        <div class="contents">
+            <div class="button" id="button_send">送信</div>
+        </div>
+        <div class="contents">
+            <div class="button" id="button_update">更新</div>
+        </div>
     </div>
-    <script type="text/javascript" src="static/js/main.js"></script>
+    <div id="chatField">
+        <div class="chated">
+            <div class="name">名前</div>
+            <div class="comment">内容</div>
+        </div>
+    </div>
+
+    <script>
+        let formName = document.getElementById("form_name")
+        let formComment = document.getElementById("form_comment")
+        let chatField = document.getElementById("chatField")
+
+        document.getElementById("button_send").onclick = function () {
+            data = {
+                name: formName.value,
+                comment: formComment.value,
+                date: Date.now()
+            }
+
+            const xhr = new XMLHttpRequest();
+            let jsonText = JSON.stringify(data);
+            xhr.open("POST", "/chat", false)
+            xhr.setRequestHeader("Content-Type", "application/json")
+            xhr.send(jsonText)
+
+            if (xhr.status !== 200) {
+                console.log(xhr.statusText)
+            }
+        }
+
+        function getChats() {
+            const xhr = new XMLHttpRequest();
+            let jsonText = JSON.stringify(data);
+            xhr.open("GET", "/chat", false)
+            xhr.send()
+
+            if (xhr.status !== 200) {
+                console.log(xhr.statusText)
+            } else {
+                chats = JSON.parse(xhr.responseText)
+                chatField.innerHTML=""
+                for (const c of chats) {
+                    chatField.innerHTML+=
+                    `<div class="chated">
+                    <div class="name">`+ c.name + `</div>
+                    <div class="comment">`+ c.comment + `</div>
+                    </div>`
+                }
+            }
+        }
+        document.getElementById("button_update").onclick = getChats
+        getChats()
+    </script>
 </body>
 
 </html>
