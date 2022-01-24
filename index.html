@@ -1,0 +1,25 @@
+<html>
+    <head>
+        <title>nch</title>
+        <style>
+            body{text-align: center;background-color: #314357;}
+            .button{background-color:#e3b587;width: 200px;height: 50px;display: flex;justify-content: center;align-items: center;border-radius: 20px;}
+            .contents{background-color:#456672;width: 300px;height: 300px;display: flex;justify-content: center;align-items: center;border-radius: 20px;margin: 10px;}
+            .form_input{color:black;display: flex;justify-content: center;}
+            .chated{margin: 10px auto;display: flex;align-items: center;background-color: #e3b587;width: 90%;height: 200px;border-radius: 20px;}
+            .name{width: 10%;}
+        </style>
+    </head>
+    <body>
+        <div class="form_input">
+            <div class="contents"><input type="text" id="form_name" name="name" size="20"></div>
+            <div class="contents"><input type="text" id="form_comment" name="comment" size="20"></div>
+            <div class="contents"><div class="button" id="button_send">送信</div></div>
+            <div class="contents"><div class="button" id="button_update">更新</div></div>
+        </div>
+        <div class="chated">
+            <div class="name">名前</div>
+            <div class="comment">内容</div>
+        </div>
+    </body>
+</html>
