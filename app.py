@@ -4,7 +4,7 @@ from crypt import methods
 from flask import *
 import json
 
-app=Flask(__name__,static_folder='static')
+app=Flask(__name__)
 
 chats=[]
 
