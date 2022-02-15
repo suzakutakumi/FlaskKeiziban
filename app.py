@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 
-from crypt import methods
 from flask import *
 import json
 
